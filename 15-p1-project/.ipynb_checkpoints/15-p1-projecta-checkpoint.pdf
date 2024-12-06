@@ -1,0 +1,259 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "0",
+   "metadata": {},
+   "source": [
+    "# 15 P1 Project"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "1",
+   "metadata": {},
+   "source": [
+    "* ist1102903 Ana Alfaiate (33%)\n",
+    "  \n",
+    "* ist1102902 Maria Inês Trigueiro (33%)\n",
+    "  \n",
+    "* ist102881 Raquel Coelho (33%)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "2",
+   "metadata": {},
+   "source": [
+    "Prof. Flávio Martins (and Prof. João Marques)\n",
+    "\n",
+    "Lab Shift number: PB03"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "3",
+   "metadata": {},
+   "source": [
+    "## PART I – E-R Model"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "4",
+   "metadata": {},
+   "source": [
+    "#### 1. Proposed database design\n",
+    "\n",
+    "An E-R model describing your proposed database design. Every design decision that can be captured in the E-R model should be represented in the diagram. Do not forget to include additional integrity constraints not captured in the E-R model. You may provide notes explaining the rationale behind non-trivial design decisions."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "5",
+   "metadata": {},
+   "source": [
+    "### E-R Model"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "6",
+   "metadata": {},
+   "source": [
+    "![E-R Model](15-p1-er-model.png \"E-R Model\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7",
+   "metadata": {},
+   "source": [
+    "## PART II – Relational Model"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8",
+   "metadata": {},
+   "source": [
+    "### Database Schema"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9",
+   "metadata": {},
+   "source": [
+    "#### 1. Create the tables and integrity constraints corresponding to the relational database schema obtained.\n",
+    "\n",
+    "Do not forget to include additional integrity constraints not captured in the relational model.\n",
+    "\n",
+    "Please use database `db`, which should already have been created. If not, follow the instructions in Lab01 to create it."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "5efc5900",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "-- create db vetDB"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "10",
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "%load_ext sql\n",
+    "%sql postgresql+psycopg://db:db@postgres/db"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "11",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%%sql\n",
+    "\n",
+    "DROP TABLE IF EXISTS Client;\n",
+    "DROP TABLE IF EXISTS Doctor;\n",
+    "DROP TABLE IF EXISTS Assistant;\n",
+    "DROP TABLE IF EXISTS Animal;\n",
+    "DROP TABLE IF EXISTS Visit;\n",
+    "DROP TABLE IF EXISTS Prescription;\n",
+    "DROP TABLE IF EXISTS Diagnostic;\n",
+    "DROP TABLE IF EXISTS Procedure;\n",
+    "\n",
+    "\n",
+    "CREATE TABLE Client (\n",
+    "    tin NUMERIC(9),\n",
+    "    name VARCHAR(80),\n",
+    "    line1 VARCHAR(255),\n",
+    "    line2 VARCHAR(255),\n",
+    "    postal_code VARCHAR(12),\n",
+    "    city VARCHAR(30),\n",
+    "    phone_nr VARCHAR(15),\n",
+    "    PRIMARY KEY (tin),\n",
+    "    --? UNIQUE (line1,line2, postal_code, city), acho que nao e preciso\n",
+    "    UNIQUE (phone_nr)\n",
+    ");\n",
+    "\n",
+    "CREATE TABLE Assistant (\n",
+    "    name VARCHAR(80),\n",
+    "    line1 VARCHAR(255),\n",
+    "    line2 VARCHAR(255),\n",
+    "    postal_code VARCHAR(12),\n",
+    "    city VARCHAR(30),\n",
+    "    phone_nr VARCHAR(15),\n",
+    "    PRIMARY KEY (phone_nr),\n",
+    "    --? UNIQUE (line1,line2, postal_code, city), acho que nao e preciso\n",
+    ");\n",
+    "\n",
+    "CREATE TABLE Doctor (\n",
+    "    omv NUMERIC(9), --type?\n",
+    "    name VARCHAR(80),\n",
+    "    line1 VARCHAR(255),\n",
+    "    line2 VARCHAR(255),\n",
+    "    postal_code VARCHAR(12),\n",
+    "    city VARCHAR(30),\n",
+    "    phone_nr VARCHAR(15),\n",
+    "    biog TEXT,\n",
+    "    PRIMARY KEY (omv),\n",
+    "    --? UNIQUE (line1,line2, postal_code, city), acho que nao e preciso\n",
+    "    UNIQUE (phone_nr)\n",
+    ");\n",
+    "\n",
+    "CREATE TABLE Animal (\n",
+    "    name VARCHAR(80),\n",
+    "    birthdate DATE,\n",
+    "    color VARCHAR(30),\n",
+    "    gender VARCHAR(9),\n",
+    "    weight ? -- in most recent measurement of weight in grams\n",
+    "    line1 VARCHAR(255),\n",
+    "    line2 VARCHAR(255),\n",
+    "    postal_code VARCHAR(12),\n",
+    "    city VARCHAR(30),\n",
+    "    phone_nr VARCHAR(15),\n",
+    "    PRIMARY KEY (omv),\n",
+    "    --? UNIQUE (line1,line2, postal_code, city), acho que nao e preciso\n",
+    ");\n",
+    "\n",
+    "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n",
+    "    text TEXT,\n",
+    "    -- Every student must appear in the table 'registers'\n",
+    "\n",
+    "CREATE TABLE Instrument (\n",
+    "    name VARCHAR(80),\n",
+    "    tonality VARCHAR(30),\n",
+    "    PRIMARY KEY (name)\n",
+    ");\n",
+    "\n",
+    "CREATE TABLE plays (\n",
+    "    idc INTEGER,\n",
+    "    name VARCHAR(80),\n",
+    "    PRIMARY KEY (idc, name),\n",
+    "    FOREIGN KEY (idc) REFERENCES Musician(idc),\n",
+    "    FOREIGN KEY (name) REFERENCES Instrument(name)\n",
+    ");\n",
+    "\n",
+    "CREATE TABLE Album (\n",
+    "    id VARCHAR(255),\n",
+    "    title VARCHAR(255),\n",
+    "    date DATE,\n",
+    "    producer INTEGER,\n",
+    "    PRIMARY KEY (id),\n",
+    "    FOREIGN KEY (producer) REFERENCES Musician(idc)\n",
+    ");\n",
+    "\n",
+    "CREATE TABLE Music (\n",
+    "    id VARCHAR(255),\n",
+    "    title VARCHAR(255),\n",
+    "    author VARCHAR(80),\n",
+    "    PRIMARY KEY (id, title, author),\n",
+    "    FOREIGN KEY (id) REFERENCES Album(id)\n",
+    "    -- Every music must appear in the table 'participates'\n",
+    ");\n",
+    "\n",
+    "CREATE TABLE participates (\n",
+    "    idc INTEGER,\n",
+    "    id VARCHAR(255),\n",
+    "    title VARCHAR(255),\n",
+    "    author VARCHAR(80),\n",
+    "    PRIMARY KEY (idc, id, title, author),\n",
+    "    FOREIGN KEY (idc) REFERENCES Musician(idc),\n",
+    "    FOREIGN KEY (id, title, author) REFERENCES Music(id, title, author)\n",
+    ");"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
