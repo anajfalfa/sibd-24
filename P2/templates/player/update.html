@@ -1,0 +1,612 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <h1>Update Player Attributes for {{ player['player_name'] }}</h1>
+{% endblock header %}
+
+{% block content %}
+    <form method="post">
+
+        <!-- Player ID (hidden field) -->
+        <input type="hidden" name="player_api_id" value="{{ player['player_api_id'] }}">
+
+        <label for="player_name">Player Name</label>
+        <input name="player_name"
+            id="player_name"
+            type="text"
+            value="{{ request.form['player_name'] or player['player_name'] }}"
+            disabled />
+        
+        <label for="gk_reflexes">GK Reflexes</label>
+        <input name="gk_reflexes"
+            id="gk_reflexes"
+            type="number"
+            min="0"
+            value="{{ request.form['gk_reflexes'] or player['gk_reflexes'] }}"
+            required />
+        
+        <label for="gk_handling">GK Handling</label>
+        <input name="gk_handling"
+            id="gk_handling"
+            type="number"
+            min="0"
+            value="{{ request.form['gk_handling'] or player['gk_handling'] }}"
+            required />
+
+        <label for="gk_kicking">GK Kicking</label>
+        <input name="gk_kicking"
+                id="gk_kicking"
+                type="number"
+                value="{{ request.form['gk_kicking'] or player['gk_kicking'] }}"
+                required />
+
+        <label for="gk_positioning">GK Positioning</label>
+        <input name="gk_positioning"
+                id="gk_positioning"
+                type="number"
+                value="{{ request.form['gk_positioning'] or player['gk_positioning'] }}"
+                required />
+
+        <label for="overall_rating">Overall Rating</label>
+        <input name="overall_rating"
+            id="overall_rating"
+            type="number"
+            min="0"
+            max="100"
+            value="{{ request.form['overall_rating'] or player['overall_rating'] }}"
+            required />
+
+        <label for="potential">Potential</label>
+        <input name="potential"
+            id="potential"
+            type="number"
+            min="0"
+            max="100"
+            value="{{ request.form['potential'] or player['potential'] }}"
+            required />
+        
+        <label for="crossing">Crossing</label>
+        <input name="crossing"
+                id="crossing"
+                type="number"
+                value="{{ request.form['crossing'] or player['crossing'] }}"
+                required />
+
+        <label for="finishing">Finishing</label>
+        <input name="finishing"
+                id="finishing"
+                type="number"
+                value="{{ request.form['finishing'] or player['finishing'] }}"
+                required />
+
+        <label for="heading_accuracy">Heading Accuracy</label>
+        <input name="heading_accuracy"
+                id="heading_accuracy"
+                type="number"
+                value="{{ request.form['heading_accuracy'] or player['heading_accuracy'] }}"
+                required />
+
+        <label for="short_passing">Short Passing</label>
+        <input name="short_passing"
+                id="short_passing"
+                type="number"
+                value="{{ request.form['short_passing'] or player['short_passing'] }}"
+                required />
+
+        <label for="volleys">Volleys</label>
+        <input name="volleys"
+                id="volleys"
+                type="number"
+                value="{{ request.form['volleys'] or player['volleys'] }}"
+                required />
+
+        <label for="dribbling">Dribbling</label>
+        <input name="dribbling"
+                id="dribbling"
+                type="number"
+                value="{{ request.form['dribbling'] or player['dribbling'] }}"
+                required />
+
+        <label for="curve">Curve</label>
+        <input name="curve"
+                id="curve"
+                type="number"
+                value="{{ request.form['curve'] or player['curve'] }}"
+                required />
+
+        <label for="free_kick_accuracy">Free Kick Accuracy</label>
+        <input name="free_kick_accuracy"
+                id="free_kick_accuracy"
+                type="number"
+                value="{{ request.form['free_kick_accuracy'] or player['free_kick_accuracy'] }}"
+                required />
+
+        <label for="long_passing">Long Passing</label>
+        <input name="long_passing"
+                id="long_passing"
+                type="number"
+                value="{{ request.form['long_passing'] or player['long_passing'] }}"
+                required />
+
+        <label for="ball_control">Ball Control</label>
+        <input name="ball_control"
+                id="ball_control"
+                type="number"
+                value="{{ request.form['ball_control'] or player['ball_control'] }}"
+                required />
+
+        <label for="acceleration">Acceleration</label>
+        <input name="acceleration"
+                id="acceleration"
+                type="number"
+                value="{{ request.form['acceleration'] or player['acceleration'] }}"
+                required />
+
+        <label for="sprint_speed">Sprint Speed</label>
+        <input name="sprint_speed"
+                id="sprint_speed"
+                type="number"
+                value="{{ request.form['sprint_speed'] or player['sprint_speed'] }}"
+                required />
+
+        <label for="agility">Agility</label>
+        <input name="agility"
+                id="agility"
+                type="number"
+                value="{{ request.form['agility'] or player['agility'] }}"
+                required />
+
+        <label for="reactions">Reactions</label>
+        <input name="reactions"
+                id="reactions"
+                type="number"
+                value="{{ request.form['reactions'] or player['reactions'] }}"
+                required />
+
+        <label for="balance">Balance</label>
+        <input name="balance"
+                id="balance"
+                type="number"
+                value="{{ request.form['balance'] or player['balance'] }}"
+                required />
+
+        <label for="shot_power">Shot Power</label>
+        <input name="shot_power"
+                id="shot_power"
+                type="number"
+                value="{{ request.form['shot_power'] or player['shot_power'] }}"
+                required />
+
+        <label for="jumping">Jumping</label>
+        <input name="jumping"
+                id="jumping"
+                type="number"
+                value="{{ request.form['jumping'] or player['jumping'] }}"
+                required />
+
+        <label for="stamina">Stamina</label>
+        <input name="stamina"
+                id="stamina"
+                type="number"
+                value="{{ request.form['stamina'] or player['stamina'] }}"
+                required />
+
+        <label for="strength">Strength</label>
+        <input name="strength"
+                id="strength"
+                type="number"
+                value="{{ request.form['strength'] or player['strength'] }}"
+                required />
+
+        <label for="long_shots">Long Shots</label>
+        <input name="long_shots"
+                id="long_shots"
+                type="number"
+                value="{{ request.form['long_shots'] or player['long_shots'] }}"
+                required />
+
+        <label for="aggression">Aggression</label>
+        <input name="aggression"
+                id="aggression"
+                type="number"
+                value="{{ request.form['aggression'] or player['aggression'] }}"
+                required />
+
+        <label for="interceptions">Interceptions</label>
+        <input name="interceptions"
+                id="interceptions"
+                type="number"
+                value="{{ request.form['interceptions'] or player['interceptions'] }}"
+                required />
+
+        <label for="positioning">Positioning</label>
+        <input name="positioning"
+                id="positioning"
+                type="number"
+                value="{{ request.form['positioning'] or player['positioning'] }}"
+                required />
+
+        <label for="vision">Vision</label>
+        <input name="vision"
+                id="vision"
+                type="number"
+                value="{{ request.form['vision'] or player['vision'] }}"
+                required />
+
+        <label for="penalties">Penalties</label>
+        <input name="penalties"
+                id="penalties"
+                type="number"
+                value="{{ request.form['penalties'] or player['penalties'] }}"
+                required />
+
+        <label for="marking">Marking</label>
+        <input name="marking"
+                id="marking"
+                type="number"
+                value="{{ request.form['marking'] or player['marking'] }}"
+                required />
+
+        <label for="standing_tackle">Standing Tackle</label>
+        <input name="standing_tackle"
+                id="standing_tackle"
+                type="number"
+                value="{{ request.form['standing_tackle'] or player['standing_tackle'] }}"
+                required />
+
+        <label for="sliding_tackle">Sliding Tackle</label>
+        <input name="sliding_tackle"
+                id="sliding_tackle"
+                type="number"
+                value="{{ request.form['sliding_tackle'] or player['sliding_tackle'] }}"
+                required />
+
+        <label for="gk_diving">GK Diving</label>
+        <input name="gk_diving"
+                id="gk_diving"
+                type="number"
+                value="{{ request.form['gk_diving'] or player['gk_diving'] }}"
+                required />
+
+        <label for="attacking_work_rate">Attacking Work Rate</label>
+        <select name="attacking_work_rate" id="attacking_work_rate" required>
+            <option value="Low" {% if request.form['attacking_work_rate'] == 'Low' or player['attacking_work_rate'] == 'Low' %}selected{% endif %}>Low</option>
+            <option value="Medium" {% if request.form['attacking_work_rate'] == 'Medium' or player['attacking_work_rate'] == 'Medium' %}selected{% endif %}>Medium</option>
+            <option value="High" {% if request.form['attacking_work_rate'] == 'High' or player['attacking_work_rate'] == 'High' %}selected{% endif %}>High</option>
+        </select>
+
+        <label for="defensive_work_rate">Defensive Work Rate</label>
+        <select name="defensive_work_rate" id="defensive_work_rate" required>
+            <option value="Low" {% if request.form['defensive_work_rate'] == 'Low' or player['defensive_work_rate'] == 'Low' %}selected{% endif %}>Low</option>
+            <option value="Medium" {% if request.form['defensive_work_rate'] == 'Medium' or player['defensive_work_rate'] == 'Medium' %}selected{% endif %}>Medium</option>
+            <option value="High" {% if request.form['defensive_work_rate'] == 'High' or player['defensive_work_rate'] == 'High' %}selected{% endif %}>High</option>
+        </select>
+
+        <label for="preferred_foot">Preferred Foot</label>
+        <select name="preferred_foot" id="preferred_foot" required>
+            <option value="Left" {% if request.form['preferred_foot'] == 'Left' or player['preferred_foot'] == 'Left' %}selected{% endif %}>Left</option>
+            <option value="Right" {% if request.form['preferred_foot'] == 'Right' or player['preferred_foot'] == 'Right' %}selected{% endif %}>Right</option>
+        </select>
+
+        <input type="submit" value="Save" />
+    </form>
+
+    <!-- Add more fields as needed 
+        <label for="date">Date</label>
+        <input type="text" id="date" name="date" value="{{ player_attributes.date }}" required> -->
+        
+    <hr />
+    <form action="{{ url_for('player_delete', player_api_id=player['player_api_id']) }}"
+          method="post">
+        <input class="danger"
+               type="submit"
+               value="Delete"
+               onclick="return confirm('Are you sure you want to delete this player?');" />
+    </form>
+    <!-- Add more fields as needed for all attributes -->
+
+
+    <!--  
+    <form action="{{ url_for('player_update_save', player_api_id=player['player_fifa_api_id']) }}" method="POST">
+        <label for="gk_reflexes">GK Reflexes</label>
+        <input type="number" id="gk_reflexes" name="gk_reflexes" value="{{ player_attributes.gk_reflexes }}" required>
+
+        <label for="gk_handling">GK Handling</label>
+        <input type="number" id="gk_handling" name="gk_handling" value="{{ player_attributes.gk_handling }}" required>
+
+        <label for="gk_kicking">GK Kicking</label>
+        <input type="number" id="gk_kicking" name="gk_kicking" value="{{ player_attributes.gk_kicking }}" required>
+
+        <label for="gk_positioning">GK Positioning</label>
+        <input type="number" id="gk_positioning" name="gk_positioning" value="{{ player_attributes.gk_positioning }}" required>
+        
+        <label for="overall_rating">Overall Rating</label>
+        <input type="number" id="overall_rating" name="overall_rating" value="{{ player_attributes.overall_rating }}" required>
+        
+        <label for="potential">Potential</label>
+        <input type="number" id="potential" name="potential" value="{{ player_attributes.potential }}" required>
+        
+        <label for="crossing">Crossing</label>
+        <input type="number" id="crossing" name="crossing" value="{{ player_attributes.crossing }}" required>
+        
+        <label for="finishing">Finishing</label>
+        <input type="number" id="finishing" name="finishing" value="{{ player_attributes.finishing }}" required>
+        
+        <label for="heading_accuracy">Heading Accuracy</label>
+        <input type="number" id="heading_accuracy" name="heading_accuracy" value="{{ player_attributes.heading_accuracy }}" required>
+        
+        <label for="short_passing">Short Passing</label>
+        <input type="number" id="short_passing" name="short_passing" value="{{ player_attributes.short_passing }}" required>
+        
+        <label for="volleys">Volleys</label>
+        <input type="number" id="volleys" name="volleys" value="{{ player_attributes volleys }}" required>
+        
+        <label for="dribbling">Dribbling</label>
+        <input type="number" id="dribbling" name="dribbling" value="{{ player_attributes.dribbling }}" required>
+        
+        <label for="curve">Curve</label>
+        <input type="number" id="curve" name="curve" value="{{ player_attributes.curve }}" required>
+        
+        <label for="free_kick_accuracy">Free Kick Accuracy</label>
+        <input type="number" id="free_kick_accuracy" name="free_kick_accuracy" value="{{ player_attributes.free_kick_accuracy }}" required>
+        
+        <label for="long_passing">Long Passing</label>
+        <input type="number" id="long_passing" name="long_passing" value="{{ player_attributes.long_passing }}" required>
+        
+        <label for="ball_control">Ball Control</label>
+        <input type="number" id="ball_control" name="ball_control" value="{{ player_attributes.ball_control }}" required>
+        
+        <label for="acceleration">Acceleration</label>
+        <input type="number" id="acceleration" name="acceleration" value="{{ player_attributes.acceleration }}" required>
+        
+        <label for="sprint_speed">Sprint Speed</label>
+        <input type="number" id="sprint_speed" name="sprint_speed" value="{{ player_attributes.sprint_speed }}" required>
+        
+        <label for="agility">Agility</label>
+        <input type="number" id="agility" name="agility" value="{{ player_attributes.agility }}" required>
+        
+        <label for="reactions">Reactions</label>
+        <input type="number" id="reactions" name="reactions" value="{{ player_attributes.reactions }}" required>
+        
+        <label for="balance">Balance</label>
+        <input type="number" id="balance" name="balance" value="{{ player_attributes.balance }}" required>
+        
+        <label for="shot_power">Shot Power</label>
+        <input type="number" id="shot_power" name="shot_power" value="{{ player_attributes.shot_power }}" required>
+        
+        <label for="jumping">Jumping</label>
+        <input type="number" id="jumping" name="jumping" value="{{ player_attributes.jumping }}" required>
+        
+        <label for="stamina">Stamina</label>
+        <input type="number" id="stamina" name="stamina" value="{{ player_attributes.stamina }}" required>
+        
+        <label for="strength">Strength</label>
+        <input type="number" id="strength" name="strength" value="{{ player_attributes.strength }}" required>
+        
+        <label for="long_shots">Long Shots</label>
+        <input type="number" id="long_shots" name="long_shots" value="{{ player_attributes.long_shots }}" required>
+        
+        <label for="aggression">Aggression</label>
+        <input type="number" id="aggression" name="aggression" value="{{ player_attributes.aggression }}" required>
+        
+        <label for="interceptions">Interceptions</label>
+        <input type="number" id="interceptions" name="interceptions" value="{{ player_attributes.interceptions }}" required>
+        
+        <label for="positioning">Positioning</label>
+        <input type="number" id="positioning" name="positioning" value="{{ player_attributes.positioning }}" required>
+        
+        <label for="vision">Vision</label>
+        <input type="number" id="vision" name="vision" value="{{ player_attributes.vision }}" required>
+        
+        <label for="penalties">Penalties</label>
+        <input type="number" id="penalties" name="penalties" value="{{ player_attributes.penalties }}" required>
+        
+        <label for="marking">Marking</label>
+        <input type="number" id="marking" name="marking" value="{{ player_attributes.marking }}" required>
+        
+        <label for="standing_tackle">Standing Tackle</label>
+        <input type="number" id="standing_tackle" name="standing_tackle" value="{{ player_attributes.standing_tackle }}" required>
+        
+        <label for="sliding_tackle">Sliding Tackle</label>
+        <input type="number" id="sliding_tackle" name="sliding_tackle" value="{{ player_attributes.sliding_tackle }}" required>
+        
+        <label for="gk_diving">GK Diving</label>
+        <input type="number" id="gk_diving" name="gk_diving" value="{{ player_attributes.gk_diving }}" required>
+        
+        <label for="attacking_work_rate">Attacking Work Rate</label>
+        <input type="text" id="attacking_work_rate" name="attacking_work_rate" value="{{ player_attributes.attacking_work_rate }}" required>
+        
+        <label for="defensive_work_rate">Defensive Work Rate</label>
+        <input type="text" id="defensive_work_rate" name="defensive_work_rate" value="{{ player_attributes.defensive_work_rate }}" required>
+        
+        <label for="preferred_foot">Preferred Foot</label>
+        <input type="text" id="preferred_foot" name="preferred_foot" value="{{ player_attributes.preferred_foot }}" required>
+        
+        
+
+        <button type="submit">Save [Player Attributes]</button>
+        <a href="{{ url_for('players_index_view') }}" class="button">Cancel</a>
+
+    </form> -->
+
+    <!-- OR
+    <form method="POST">
+        <div>
+            <label for="preferred_foot">Preferred Foot:</label>
+            <input type="text" name="preferred_foot" id="preferred_foot" value="{{ player.preferred_foot }}" />
+        </div>
+        <div>
+            <label for="crossing">Crossing:</label>
+            <input type="number" name="crossing" id="crossing" value="{{ player.crossing }}" />
+        </div>
+        <div>
+            <label for="potential">Potential:</label>
+            <input type="number" name="potential" id="potential" value="{{ player.potential }}" />
+        </div>
+        <button type="submit">Save</button>
+    </form> -->
+
+    {% if error_message %}
+        <div class="error">
+            <strong>Error:</strong> {{ error_message }}
+        </div>
+    {% endif %}
+{% endblock content %}
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Player Attributes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <h1><a href="{{ url_for('players_index_view') }}">Player Management</a></h1>
+    </nav>
+
+    <section class="content">
+        <header>
+            <h1>Edit Player Attributes</h1>
+        </header>
+        
+        {% for message in get_flashed_messages(with_categories=true) %}
+            <div class="flash {{ message[0] }}">{{ message[1] }}</div>
+        {% endfor %}
+        
+        <form action="{{ url_for('player_update_save', player_api_id=player_api_id) }}" method="POST">
+            <label for="gk_reflexes">GK Reflexes</label>
+            <input type="number" id="gk_reflexes" name="gk_reflexes" value="{{ player_attributes.gk_reflexes }}" required>
+
+            <label for="gk_handling">GK Handling</label>
+            <input type="number" id="gk_handling" name="gk_handling" value="{{ player_attributes.gk_handling }}" required>
+
+            <label for="gk_kicking">GK Kicking</label>
+            <input type="number" id="gk_kicking" name="gk_kicking" value="{{ player_attributes.gk_kicking }}" required>
+
+            Add more fields as necessary x
+            <label for="preferred_foot">Preferred Foot</label>
+            <input type="text" id="preferred_foot" name="preferred_foot" value="{{ player_attributes.preferred_foot }}" required>
+
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" value="{{ player_attributes.date }}" required>
+
+            <input type="submit" value="Save Changes">
+            <a href="{{ url_for('players_index_view') }}" class="button">Cancel</a>
+        </form>
+    </section>
+</body>
+</html> -->
+
+
+<!-- {% extends "base.html" %}
+{% block header %}
+    <h1>
+        {% block title %}
+            Player {{ players_index_view['player_fifa_api_id'] }} | Edit
+        {% endblock title %}
+    </h1>
+{% endblock header %}
+{% block content %}
+    <form method="post">
+        <label for="player_fifa_api_id">Player id</label>
+        <input name="player_fifa_api_id"
+               id="player_fifa_api_id"
+               type="text"
+               value="{{ request.form['player_fifa_api_id'] or players_index_view['player_fifa_api_id'] }}"
+               disabled />
+        <label for="balance">Balance</label>
+        <input name="balance"
+               id="balance"
+               type="number"
+               min="0"
+               step="0.0001"
+               placeholder="0.0000"
+               value="{{ request.form['balance'] or account['balance'] }}"
+               required />
+        <input type="submit" value="Save" />
+    </form>
+    <hr />
+    <form action="{{ url_for('account_delete', account_number=account['account_number']) }}"
+          method="post">
+        <input class="danger"
+               type="submit"
+               value="Delete"
+               onclick="return confirm('Are you sure?');" />
+    </form>
+{% endblock content %} -->
+
+
+<!-- {% extends "base.html" %}
+
+{% block header %}
+    <h1>Update Player: {{ player[0] }}</h1>
+{% endblock header %}
+
+{% block content %}
+    {% if error_message %}
+        <div class="error-message">{{ error_message }}</div>
+    {% endif %}
+    
+    <form method="POST" action="{{ url_for('player_update_save', player_api_id=player_api_id) }}">
+        <div>
+            <label for="player_name">Player Name</label>
+            <input type="text" id="player_name" name="player_name" value="{{ player[0] }}" required>
+        </div>
+        <div>
+            <label for="preferred_foot">Preferred Foot</label>
+            <input type="text" id="preferred_foot" name="preferred_foot" value="{{ player[1] }}" required>
+        </div>
+        <div>
+            <label for="crossing">Crossing</label>
+            <input type="number" id="crossing" name="crossing" value="{{ player[2] }}" required>
+        </div>
+        <div>
+            <label for="potential">Potential</label>
+            <input type="number" id="potential" name="potential" value="{{ player[3] }}" required>
+        </div>
+        <button type="submit">Update Player</button>
+    </form>
+{% endblock content %} -->
+
+
+
+<!-- {% extends "base.html" %}
+{% block header %}
+    <h1>
+        {% block title %}
+            Account {{ account['account_number'] }} | Edit
+        {% endblock title %}
+    </h1>
+{% endblock header %}
+{% block content %}
+    <form method="post">
+        <label for="account_number">Account Number</label>
+        <input name="account_number"
+               id="account_number"
+               type="text"
+               value="{{ request.form['account_number'] or account['account_number'] }}"
+               disabled />
+        <label for="balance">Balance</label>
+        <input name="balance"
+               id="balance"
+               type="number"
+               min="0"
+               step="0.0001"
+               placeholder="0.0000"
+               value="{{ request.form['balance'] or account['balance'] }}"
+               required />
+        <input type="submit" value="Save" />
+    </form>
+    <hr />
+    <form action="{{ url_for('account_delete', account_number=account['account_number']) }}"
+          method="post">
+        <input class="danger"
+               type="submit"
+               value="Delete"
+               onclick="return confirm('Are you sure?');" />
+    </form>
+{% endblock content %}
+-->
