@@ -219,8 +219,14 @@ def player_update_save(player_api_id):
             "attacking_work_rate": request.form['attacking_work_rate'],
             "defensive_work_rate": request.form['defensive_work_rate'],
             "preferred_foot": request.form['preferred_foot'],
-            "date": datetime.datetime.now(), # request.form['date'],  # You can use datetime if required
+            "date": datetime.strptime(request.form['date'], '%Y-%m-%dT%H:%M'),  # Add the datetime object to the data dictionary
         }
+
+        # strftime('%Y-%m-%d %H:%M:%S')
+        date_value = datetime.strptime(request.form['date'], '%Y-%m-%d %H:%M:%S')
+
+        
+        # You can use datetime if required datetime.datetime.now(), 
         # player_name = request.form["player_name"]
 
         # Validate the input data (basic checks)
@@ -243,7 +249,6 @@ def player_update_save(player_api_id):
                 
                 # Executar o comando
                 cur.execute(sql_query, values)
-                conn.commit()
                 conn.commit()
 
         # Redirect to players index after success

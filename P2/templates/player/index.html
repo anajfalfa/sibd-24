@@ -13,7 +13,7 @@
             <header>
                 <div>
                     <h1>{{ player['player_name'] }}</h1>
-                    <div class="about">Last Updated: {{ player['date'] }}</div>  <!-- Data da última atualização -->
+                    <div class="about">Last Updated: {{ players_index_view['date'] }}</div>  <!-- player_attributes.date Data da última atualização -->
                 </div>
                 <a class="action"
                     href="{{ url_for('players_index_view', player_api_id=player['player_api_id']) }}">Edit | View Details</a>
