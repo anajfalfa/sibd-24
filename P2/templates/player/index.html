@@ -7,66 +7,17 @@
     </h1>
 {% endblock header %}
 {% block content %}
-
     {% for player in players %}
         <article class="post">
             <header>
                 <div>
                     <h1>{{ player['player_name'] }}</h1>
-                    <div class="about">Last Updated: {{ players_index_view['date'] }}</div>  <!-- player_attributes.date Data da última atualização -->
+                    <div class="about">Last Updated: {{ player['date'] }}</div>
                 </div>
                 <a class="action"
-                    href="{{ url_for('players_index_view', player_api_id=player['player_api_id']) }}">Edit | View Details</a>
+                   href="{{ url_for('player_update_view', player_api_id=player['player_id']) }}">Edit</a>
             </header>
-            <p class="body"> Potential: {{ player['potential'] }} </p>
-            <!-- add more attributes?-->
         </article>
         {% if not loop.last %}<hr />{% endif %}
     {% endfor %}
-
-<!--
-escolher entre estes dois
-% extends "base.html" %}
-
-{% block header %}
-    <h1>Players</h1>
-{% endblock header %}
-
-{% block content %}
-    <ul>
-        {% for player in players %}
-            <li>
-                <h2>{{ player['player_name'] }}</h2>
-                <p>Most Recent Attribute Date: {{ player['date'] }}</p>
-            </li>
-        {% endfor %}
-    </ul>
-{% endblock content %}
-
-    -->
-
-    <!-- OR AFTER {% block content %}
-     <div class="players-list">
-        {% if players %}
-            <ul>
-                {% for player in players %}
-                    <li>
-                        <article class="post">
-                            <header>
-                                <div>
-                                    <h1>{{ player['player_name'] }}</h1>  
-                                    <div class="about">Last Updated: {{ player['date'] }}</div>  
-                                </div>
-                                <a class="action" href="{{ url_for('players_index_view', player_api_id=player['player_fifa_api_id']) }}">View Details</a>
-                            </header>
-                        </article>
-                    </li>
-                    {% if not loop.last %}<hr />{% endif %}
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No players found.</p>
-        {% endif %}
-    </div>
-     -->
 {% endblock content %}

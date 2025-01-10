@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- added by us aa-->
 <title>
     {% block title %}
     {% endblock title %}
-- Player Management / Edit Player Information </title>
+-  Player Management </title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 <nav>
     <h1>
-        <a href="{{ url_for('players_index_view') }}">Player Management</a>
+        <a href="{{ url_for('players_index') }}">Player Management</a>
     </h1>
     <ul>
         <li>
-            <a href="{{ url_for('players_index_view') }}">Players</a>
+            <a href="{{ url_for('players_index') }}">Players</a>
         </li>
     </ul>
 </nav>
