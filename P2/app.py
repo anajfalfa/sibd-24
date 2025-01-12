@@ -90,7 +90,6 @@ def players_index():
                 {},
             ).fetchall()
             log.debug(f"Found {cur.rowcount} rows.")
-
     return render_template("player/index.html", players=players)
 
 
@@ -109,7 +108,7 @@ def player_update_view(player_api_id):
                 ON pa.player_api_id = piv.player_id AND pa.date = piv.date
                 WHERE player_api_id = %(player_api_id)s;
                 """,
-                {"player_api_id": int(player_api_id)},
+                {"player_api_id": player_api_id},
             ).fetchone()
             log.debug(f"Found {cur.rowcount} rows.")
     if not player:
@@ -117,8 +116,6 @@ def player_update_view(player_api_id):
 
     # At the end of the `connection()` context, the transaction is committed
     # or rolled back, and the connection returned to the pool.
-
-#    return render_template("account/update.html", account=account)
     return render_template("player/update.html", player=player)
 
 
@@ -150,13 +147,35 @@ def player_update_save(player_api_id):
         
         data["player_api_id"] = player_api_id
 
+        if not data:
+            flash("No changes detected.", "info")
+            return redirect(url_for("player_update", player_api_id=player_api_id))
 
         if "date" in data:
             try:
-                converted_date = datetime.strptime(data["date"], '%Y-%m-%dT%H:%M')  # Converte para datetime
+                converted_date = datetime.strptime(data["date"], '%Y-%m-%dT%H:%M')  #datetime type
                 data["date"] = converted_date
             except ValueError:
                 raise ValueError("Invalid date format. Please use 'YYYY-MM-DDTHH:MM'.")
+
+        ranged_fields = ("gk_reflexes", "gk_handling", "gk_kicking", "gk_positioning",
+            "overall_rating", "potential", "crossing", "finishing",
+            "heading_accuracy", "short_passing", "volleys", "dribbling",
+            "curve", "free_kick_accuracy", "long_passing", "ball_control",
+            "acceleration", "sprint_speed", "agility", "reactions",
+            "balance", "shot_power", "jumping", "stamina", "strength",
+            "long_shots", "aggression", "interceptions", "positioning",
+            "vision", "penalties", "marking", "standing_tackle", "sliding_tackle",
+            "gk_diving" )
+        
+        for field in ranged_fields:
+            if field in data:
+                try:
+                    value = int(data[field])
+                    if not (0 <= value <= 100):
+                        raise ValueError(f"Invalid value for {field}. Must be between 0 and 100.")
+                except ValueError:
+                    raise ValueError(f"{field} must be a valid integer between 0 and 100.")
 
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -186,9 +205,11 @@ def player_update_save(player_api_id):
 
     # The connection is returned to the pool at the end of the `connection()` context but,
     # because it is not in a transaction state, no COMMIT is executed.
+   
+
         flash(f"Player {player_name}'s attributes updated successfully!", "success")
         return redirect(url_for("players_index"))
-
+        
     except ValueError as e:  # User-related error
         error_message = str(e)
         return render_template(
@@ -196,6 +217,11 @@ def player_update_save(player_api_id):
             player_api_id=player_api_id,
             error_message=error_message,
         )
+    except Exception as e:
+        log.error(f"Unexpected error: {e}")
+        return render_template("player/update.html", message="An unexpected error occurred.")
+
+
 
 @app.route("/ping", methods=("GET",))
 @limiter.exempt

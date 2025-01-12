@@ -15,8 +15,8 @@
         <input type="datetime-local"
                id="date"
                name="date"
-               value="{{ player['date'] or request.form['date']  }}" 
-          />                <!-- player_attributes.date.strftime('%Y-%m-%dT%H:%M') -->
+               value="{{ request.form['date'] if request.form.get('date') else player['date']  }}"
+               required/>                
         <span>Previous Submission: {{ player['date'] }}</span>
 
 
@@ -33,7 +33,7 @@
             type="number"
             min="0"
             value="{{ request.form['gk_reflexes'] if request.form.get('gk_reflexes') else player['gk_reflexes'] }}"
-             />
+            required/>
         <span>Previous Submission: {{ player['gk_reflexes'] }}</span>
 
 
@@ -52,6 +52,7 @@
         <input name="gk_kicking"
                 id="gk_kicking"
                 type="number"
+                min="0"
                 value="{{ request.form['gk_kicking'] or player['gk_kicking'] }}"
                 required />
                 <span>Previous Submission: {{ player['gk_kicking'] }}</span>
@@ -61,6 +62,7 @@
         <input name="gk_positioning"
                 id="gk_positioning"
                 type="number"
+                min="0"
                 value="{{ request.form['gk_positioning'] or player['gk_positioning'] }}"
                 required />
                 <span>Previous Submission: {{ player['gk_positioning'] }}</span>
@@ -92,6 +94,7 @@
         <input name="crossing"
                 id="crossing"
                 type="number"
+                min="0"
                 value="{{ request.form['crossing'] or player['crossing'] }}"
                 required />
                 <span>Previous Submission: {{ player['crossing'] }}</span>
@@ -101,6 +104,7 @@
         <input name="finishing"
                 id="finishing"
                 type="number"
+                min="0"
                 value="{{ request.form['finishing'] or player['finishing'] }}"
                 required />
                 <span>Previous Submission: {{ player['finishing'] }}</span>
@@ -110,6 +114,7 @@
         <input name="heading_accuracy"
                 id="heading_accuracy"
                 type="number"
+                min="0"
                 value="{{ request.form['heading_accuracy'] or player['heading_accuracy'] }}"
                 required />
                 <span>Previous Submission: {{ player['heading_accuracy'] }}</span>
@@ -119,6 +124,7 @@
         <input name="short_passing"
                 id="short_passing"
                 type="number"
+                min="0"
                 value="{{ request.form['short_passing'] or player['short_passing'] }}"
                 required />
                 <span>Previous Submission: {{ player['short_passing'] }}</span>
@@ -128,6 +134,7 @@
         <input name="volleys"
                 id="volleys"
                 type="number"
+                min="0"
                 value="{{ request.form['volleys'] or player['volleys'] }}"
                 required />
                 <span>Previous Submission: {{ player['volleys'] }}</span>
@@ -137,6 +144,7 @@
         <input name="dribbling"
                 id="dribbling"
                 type="number"
+                min="0"
                 value="{{ request.form['dribbling'] or player['dribbling'] }}"
                 required />
                 <span>Previous Submission: {{ player['dribbling'] }}</span>
@@ -146,6 +154,7 @@
         <input name="curve"
                 id="curve"
                 type="number"
+                min="0"
                 value="{{ request.form['curve'] or player['curve'] }}"
                 required />
                 <span>Previous Submission: {{ player['curve'] }}</span>
@@ -155,6 +164,7 @@
         <input name="free_kick_accuracy"
                 id="free_kick_accuracy"
                 type="number"
+                min="0"
                 value="{{ request.form['free_kick_accuracy'] or player['free_kick_accuracy'] }}"
                 required />
                 <span>Previous Submission: {{ player['free_kick_accuracy'] }}</span>
@@ -164,6 +174,7 @@
         <input name="long_passing"
                 id="long_passing"
                 type="number"
+                min="0"
                 value="{{ request.form['long_passing'] or player['long_passing'] }}"
                 required />
                 <span>Previous Submission: {{ player['long_passing'] }}</span>
@@ -173,6 +184,7 @@
         <input name="ball_control"
                 id="ball_control"
                 type="number"
+                min="0"
                 value="{{ request.form['ball_control'] or player['ball_control'] }}"
                 required />
                 <span>Previous Submission: {{ player['ball_control'] }}</span>
@@ -182,6 +194,7 @@
         <input name="acceleration"
                 id="acceleration"
                 type="number"
+                min="0"
                 value="{{ request.form['acceleration'] or player['acceleration'] }}"
                 required />
                 <span>Previous Submission: {{ player['acceleration'] }}</span>
@@ -191,6 +204,7 @@
         <input name="sprint_speed"
                 id="sprint_speed"
                 type="number"
+                min="0"
                 value="{{ request.form['sprint_speed'] or player['sprint_speed'] }}"
                 required />
                 <span>Previous Submission: {{ player['sprint_speed'] }}</span>
@@ -200,6 +214,7 @@
         <input name="agility"
                 id="agility"
                 type="number"
+                min="0"
                 value="{{ request.form['agility'] or player['agility'] }}"
                 required />
                 <span>Previous Submission: {{ player['agility'] }}</span>
@@ -209,6 +224,7 @@
         <input name="reactions"
                 id="reactions"
                 type="number"
+                min="0"
                 value="{{ request.form['reactions'] or player['reactions'] }}"
                 required />
                 <span>Previous Submission: {{ player['reactions'] }}</span>
@@ -218,6 +234,7 @@
         <input name="balance"
                 id="balance"
                 type="number"
+                min="0"
                 value="{{ request.form['balance'] or player['balance'] }}"
                 required />
                 <span>Previous Submission: {{ player['balance'] }}</span>
@@ -227,6 +244,7 @@
         <input name="shot_power"
                 id="shot_power"
                 type="number"
+                min="0"
                 value="{{ request.form['shot_power'] or player['shot_power'] }}"
                 required />
                 <span>Previous Submission: {{ player['shot_power'] }}</span>
@@ -236,6 +254,7 @@
         <input name="jumping"
                 id="jumping"
                 type="number"
+                min="0"
                 value="{{ request.form['jumping'] or player['jumping'] }}"
                 required />
                 <span>Previous Submission: {{ player['jumping'] }}</span>
@@ -245,6 +264,7 @@
         <input name="stamina"
                 id="stamina"
                 type="number"
+                min="0"
                 value="{{ request.form['stamina'] or player['stamina'] }}"
                 required />
                 <span>Previous Submission: {{ player['stamina'] }}</span>
@@ -254,6 +274,7 @@
         <input name="strength"
                 id="strength"
                 type="number"
+                min="0"
                 value="{{ request.form['strength'] or player['strength'] }}"
                 required />
                 <span>Previous Submission: {{ player['strength'] }}</span>
@@ -263,6 +284,7 @@
         <input name="long_shots"
                 id="long_shots"
                 type="number"
+                min="0"
                 value="{{ request.form['long_shots'] or player['long_shots'] }}"
                 required />
                 <span>Previous Submission: {{ player['long_shots'] }}</span>
@@ -272,6 +294,7 @@
         <input name="aggression"
                 id="aggression"
                 type="number"
+                min="0"
                 value="{{ request.form['aggression'] or player['aggression'] }}"
                 required />
                 <span>Previous Submission: {{ player['aggression'] }}</span>
@@ -281,6 +304,7 @@
         <input name="interceptions"
                 id="interceptions"
                 type="number"
+                min="0"
                 value="{{ request.form['interceptions'] or player['interceptions'] }}"
                 required />
                 <span>Previous Submission: {{ player['interceptions'] }}</span>
@@ -290,6 +314,7 @@
         <input name="positioning"
                 id="positioning"
                 type="number"
+                min="0"
                 value="{{ request.form['positioning'] or player['positioning'] }}"
                 required />
                 <span>Previous Submission: {{ player['positioning'] }}</span>
@@ -299,6 +324,7 @@
         <input name="vision"
                 id="vision"
                 type="number"
+                min="0"
                 value="{{ request.form['vision'] or player['vision'] }}"
                 required />
                 <span>Previous Submission: {{ player['vision'] }}</span>
@@ -308,6 +334,7 @@
         <input name="penalties"
                 id="penalties"
                 type="number"
+                min="0"
                 value="{{ request.form['penalties'] or player['penalties'] }}"
                 required />
                 <span>Previous Submission: {{ player['penalties'] }}</span>
@@ -317,6 +344,7 @@
         <input name="marking"
                 id="marking"
                 type="number"
+                min="0"
                 value="{{ request.form['marking'] or player['marking'] }}"
                 required />
                 <span>Previous Submission: {{ player['marking'] }}</span>
@@ -326,6 +354,7 @@
         <input name="standing_tackle"
                 id="standing_tackle"
                 type="number"
+                min="0"
                 value="{{ request.form['standing_tackle'] or player['standing_tackle'] }}"
                 required />
                 <span>Previous Submission: {{ player['standing_tackle'] }}</span>
@@ -335,6 +364,7 @@
         <input name="sliding_tackle"
                 id="sliding_tackle"
                 type="number"
+                min="0"
                 value="{{ request.form['sliding_tackle'] or player['sliding_tackle'] }}"
                 required />
                 <span>Previous Submission: {{ player['sliding_tackle'] }}</span>
@@ -344,6 +374,7 @@
         <input name="gk_diving"
                 id="gk_diving"
                 type="number"
+                min="0"
                 value="{{ request.form['gk_diving'] or player['gk_diving'] }}"
                 required />
                 <span>Previous Submission: {{ player['gk_diving'] }}</span>
